@@ -1,3 +1,19 @@
+// Add this after including socket.io in your HTML
+let socket;
+window.addEventListener('DOMContentLoaded', () => {
+  if (typeof io !== "undefined") {
+    socket = io();
+    // Listen for leaderboard and data updates
+    socket.on("leaderboard-update", (newData) => {
+      leaderboard = newData;
+      if (window.location.pathname.includes("leaderboard.html")) updateEnhancedLeaderboard();
+    });
+    socket.on("alldata-update", (data) => {
+      // Apply your logic to update index page data
+      // Example: updateDashboard(data);
+    });
+  }
+});
 let checkpointData = JSON.parse(localStorage.getItem("checkpointData")) || {};
 let checkpoints = JSON.parse(localStorage.getItem("checkpoints")) || ["Start", "Checkpoint 1", "Checkpoint 2", "Finish"];
 let leaderboard = [];
