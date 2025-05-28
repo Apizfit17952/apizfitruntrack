@@ -545,6 +545,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     const resetButton = document.getElementById("resetAllData");
     if (resetButton) resetButton.addEventListener('click', resetData);
+    if (socket) socket.emit("leaderboard-update", leaderboard);
+    if (socket) socket.emit("alldata-update", allData);
 
     document.querySelectorAll('.settings-card .section-header').forEach(header => {
       header.addEventListener('click', function() {
